@@ -24,7 +24,12 @@ def home():
         input_url = my_util.removeHttp(input_url)
 
         # Insert the url into the db.
-        res = "localhost:" + str(LOCAL_HOST_PORT) + "/" + myDb.insertOrReturn(input_url)
+        res = (
+            "http://localhost:"
+            + str(LOCAL_HOST_PORT)
+            + "/"
+            + myDb.insertOrReturn(input_url)
+        )
         print("Shorten URL", res)
 
         # return render_template("index.html", shorten_url=res)
