@@ -3,16 +3,20 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename = 'js/form.js') }}"></script>
 </head>
 
 <body>
-  <div style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
     <div>
       <form action="/" method="POST">
-        <input type="text" name="input_url" placeholder="Enter Url to Shorten" value="{{ request.form['title'] }}" />
-        <button type="submit">Forward</button>
+        <input type="text" id="input_url" placeholder="Enter Url to Shorten" value="{{ request.form['title'] }}" />
+        <button type="submit">Shorten</button>
       </form>
-      <h3>{{shorten_url}}</h3>
+      <h3>{{ shorten_url }}</h3>
+    </div>
+    <div id="successAlert" class="alert alert-success" role="alert" style="display:none;">
     </div>
   </div>
 </body>

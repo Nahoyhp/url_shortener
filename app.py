@@ -1,5 +1,5 @@
 from textwrap import shorten
-from flask import Flask, redirect, render_template, request
+from flask import Flask, jsonify, redirect, render_template, request
 
 import my_util
 import my_db
@@ -17,7 +17,7 @@ def home():
         return render_template("index.html", name="Hello World")
         # return my_util.generate_shorten_url()
     elif request.method == "POST":
-        input_url = request.form["input_url"]
+        input_url = request.form["input"]
         print("Input Receives", input_url)
 
         # Remove http or https at the start
@@ -27,18 +27,19 @@ def home():
         res = "localhost:" + str(LOCAL_HOST_PORT) + "/" + myDb.insertOrReturn(input_url)
         print("Shorten URL", res)
 
-        return render_template("index.html", shorten_url=res)
+        # return render_template("index.html", shorten_url=res)
+        return jsonify({"input": input_url, "shorten": res})
+    else:
+        print("Unexepceted Path taken")
 
 
 @app.route("/<shorten_url>", methods=["GET", "POST"])
 def url_redirect(shorten_url):
     print("shorten_url", shorten_url)
-    result = myDb.contain(shorten_url)
+    result = myDb.reverse_lookup(shorten_url)
     if result == False:
         return "URL Not Found"
     return redirect("https://" + result)
-    # print("shorten_url", shorten_url)
-    # return render_template("index.html", input_url=shorten_url, name="Hello World")
 
 
 if __name__ == "__main__":
