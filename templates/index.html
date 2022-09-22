@@ -1,0 +1,21 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+</head>
+
+<body>
+  <div style="min-height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div>
+      <form action="/" method="POST">
+        <input type="text" name="input_url" placeholder="Enter Url to Shorten" value="{{ request.form['title'] }}" />
+        <button type="submit">Forward</button>
+      </form>
+      <h3>{{shorten_url}}</h3>
+    </div>
+  </div>
+</body>
+
+
+</html>
